@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "6lZ/hRBlUZolfsmQ5MrffbQ/sYGfZhnOgYHDG27eUjQ=",
+  "Source": "conocelos_v3",
+  "BasePath": "_content/conocelos_v3",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "conocelos_v3\\wwwroot",
+      "Source": "conocelos_v3",
+      "ContentRoot": "C:\\Users\\Administrador\\Documents\\a_Trabajo JPR Consulting\\Utilidades_Web_Api\\conocelos_v4\\conocelos-v3-master\\wwwroot\\",
+      "BasePath": "_content/conocelos_v3",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

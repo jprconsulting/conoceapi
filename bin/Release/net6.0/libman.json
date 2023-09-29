@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "filesystem",
+      "library": "images/",
+      "destination": "img",
+      "files": [
+        "348883fc-e488-4da9-9f43-a95cd13634ba.png",
+        "fba80f7f-1480-4355-9487-51eb2adc497e.jpg"
+      ]
+    },
+    {
+      "provider": "filesystem",
+      "library": "wwwroot/",
+      "destination": "wwwroot/images/wwwroot/"
+    }
+  ]
+}
