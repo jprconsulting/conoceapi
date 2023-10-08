@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Administrador\\Documents\\a_Trabajo JPR Consulting\\Utilidades_Web_Api\\conocelos_v4\\conocelos-v3-master\\wwwroot\\images\\2801c0e6-88fa-4e51-b40c-217caf0f305c_string",
-      "PackagePath": "staticwebassets\\images"
+      "Id": "C:\\Users\\ATI\\Desktop\\conocelos-v5-main\\conocelos-v3-master\\conoceapi\\wwwroot\\images\\vaxmexico.jpg",
+      "PackagePath": "staticwebassets\\images\\vaxmexico.jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.conocelos_v3.props",

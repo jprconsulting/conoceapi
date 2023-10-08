@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Zgc4DTq2qFoxrD0N4+nhcDc2w/kgwTBo/5wv1UUhuwk=",
+  "Hash": "eryeq+lMr/YYEm6+grDkBCJP5KTNRUq247DtNY2rAyw=",
   "Source": "conocelos_v3",
   "BasePath": "_content/conocelos_v3",
   "Mode": "Default",
@@ -10,10 +10,28 @@
     {
       "Name": "conocelos_v3\\wwwroot",
       "Source": "conocelos_v3",
-      "ContentRoot": "C:\\Users\\Administrador\\Documents\\a_Trabajo JPR Consulting\\Utilidades_Web_Api\\conocelos_v4\\conocelos-v3-master\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\ATI\\Desktop\\conocelos-v5-main\\conocelos-v3-master\\conoceapi\\wwwroot\\",
       "BasePath": "_content/conocelos_v3",
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\ATI\\Desktop\\conocelos-v5-main\\conocelos-v3-master\\conoceapi\\wwwroot\\images\\vaxmexico.jpg",
+      "SourceId": "conocelos_v3",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ATI\\Desktop\\conocelos-v5-main\\conocelos-v3-master\\conoceapi\\wwwroot\\",
+      "BasePath": "_content/conocelos_v3",
+      "RelativePath": "images/vaxmexico.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\vaxmexico.jpg"
+    }
+  ]
 }

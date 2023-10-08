@@ -142,10 +142,10 @@ public partial class ConocelosV2Context : DbContext
             entity.Property(e => e.Estatus)
                 .HasColumnType("bit(1)")
                 .HasColumnName("estatus");
-            entity.Property(e => e.Logo)
-                .IsRequired()
-                .HasMaxLength(200)
-                .HasColumnName("logo");
+            //entity.Property(e => e.Logo)
+            //    .IsRequired()
+            //    .HasMaxLength(200)
+            //    .HasColumnName("logo");
             entity.Property(e => e.NombreCandidatura)
                 .IsRequired()
                 .HasMaxLength(500)

@@ -15,6 +15,8 @@ public partial class Candidatura
 
     public bool Estatus { get; set; }
 
+    public string acronimo { get; set; }
+
     // public virtual ICollection<Candidato> Candidatos { get; set; } = new List<Candidato>();
 
     public virtual TipoCandidatura TipoCandidatura { get; set; }

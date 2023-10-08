@@ -15,5 +15,7 @@
         public bool Estatus { get; set; }
 
         public IFormFile imagen { get; set; }
+
+        public string acronimo { get; set; }
     }
 }

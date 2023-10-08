@@ -33,16 +33,16 @@ namespace conocelos_v3.Controllers
             try
             {
                 candidaturasFullResult = (from candidatura in _context.Candidaturas
-                                          join tipoCandidatura in _context.TipoCandidaturas
-                                          on candidatura.CandidaturaId equals tipoCandidatura.TipoCandidaturaId
+                                          //join tipoCandidatura in _context.TipoCandidaturas
+                                          //on candidatura.CandidaturaId equals tipoCandidatura.TipoCandidaturaId
                                           select new CandidaturaDTO()
                                           {
                                               CandidaturaId = candidatura.CandidaturaId,
                                               TipoCandidaturaId = candidatura.TipoCandidaturaId,
-                                              NombreTipoCandidatura = tipoCandidatura.NombreTipoCandidatura,
                                               NombreCandidatura = candidatura.NombreCandidatura,
                                               Logo = candidatura.Logo,
-                                              Estatus = candidatura.Estatus == true
+                                              Estatus = candidatura.Estatus == true,
+                                              acronimo = candidatura.acronimo
                                           }).ToList();
 
                 return Ok(candidaturasFullResult);
@@ -172,7 +172,7 @@ namespace conocelos_v3.Controllers
         }
 
         [HttpPost("subir_base64")]
-        public async Task<IActionResult> SubirImagenBase64([FromBody] Candidatura2DTO dto)
+        public IActionResult SubirTexto([FromBody] Candidatura2DTO dto)
         {
             if (dto == null)
             {
@@ -180,44 +180,26 @@ namespace conocelos_v3.Controllers
             }
             try
             {
-                // Decodifica la cadena Base64 en un arreglo de bytes.
-                byte[] imageBytes = Convert.FromBase64String(dto.Base64Logo);
-
-
-                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-
-                if (!Directory.Exists(uploadsFolder))
-                {
-                    Directory.CreateDirectory(uploadsFolder);
-                }
-
-                //var uniqueFileName = Guid.NewGuid().ToString() + "_" + dto.NombreCandidatura + ".jpg";
-                var uniqueFileName = dto.NombreFoto + ".jpg";
-                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                /// HASTA AQUI TODO BIEN 
-
-
-                /// DIREFERENCIAS 
-                System.IO.File.WriteAllBytes(filePath, imageBytes);
-
 
                 _context.Candidaturas.Add(new Candidatura()
                 {
                     TipoCandidaturaId = dto.TipoCandidaturaId,
                     NombreCandidatura = dto.NombreCandidatura,
-                    Logo = dto.NombreCandidatura,
-                    Estatus = dto.Estatus
+                    Logo = dto.Logo,
+                    Estatus = dto.Estatus,
+                    acronimo = dto.acronimo
                 });
-                _context.SaveChangesAsync();
+                _context.SaveChanges(); 
 
-                // Aquí puedes guardar el nombre de la imagen en tu base de datos si es necesario.
-                return Ok(new { ruta = filePath, name = "Todo salio Ok ! " });
+                // Devuelve una respuesta de éxito.
+                return Ok(new { message = "Datos de texto guardados correctamente." });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Error interno del servidor: {ex.Message}");
             }
         }
+
 
     }
 }
