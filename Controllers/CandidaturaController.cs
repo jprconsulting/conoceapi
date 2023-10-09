@@ -42,7 +42,7 @@ namespace conocelos_v3.Controllers
                                               NombreCandidatura = candidatura.NombreCandidatura,
                                               Logo = candidatura.Logo,
                                               Estatus = candidatura.Estatus == true,
-                                              acronimo = candidatura.acronimo
+                                              Acronimo = candidatura.acronimo
                                           }).ToList();
 
                 return Ok(candidaturasFullResult);
@@ -127,78 +127,78 @@ namespace conocelos_v3.Controllers
             }
         }
 
-        [HttpPost("subir_formfile")]
-        public async Task<IActionResult> SubirImagen([FromForm] CandidaturaDTO dto)
-        {
-            if (dto == null)
-            {
-                return BadRequest();
-            }
-            try
-            {
-                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+        //[HttpPost("subir_formfile")]
+        //public async Task<IActionResult> SubirImagen([FromForm] CandidaturaDTO dto)
+        //{
+        //    if (dto == null)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    try
+        //    {
+        //        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
 
-                if (!Directory.Exists(uploadsFolder))
-                {
-                    Directory.CreateDirectory(uploadsFolder);
-                }
+        //        if (!Directory.Exists(uploadsFolder))
+        //        {
+        //            Directory.CreateDirectory(uploadsFolder);
+        //        }
 
-                var uniqueFileName = Guid.NewGuid().ToString() + "_" + dto.imagen.FileName;
-                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+        //        var uniqueFileName = Guid.NewGuid().ToString() + "_" + dto.imagen.FileName;
+        //        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await dto.imagen.CopyToAsync(stream);
-                }
-
-
-                _context.Candidaturas.Add(new Candidatura()
-                {
-                    TipoCandidaturaId = dto.TipoCandidaturaId,
-                    NombreCandidatura = dto.NombreCandidatura,
-                    Logo = dto.imagen.FileName,
-                    Estatus = dto.Estatus
-                });
+        //        using (var stream = new FileStream(filePath, FileMode.Create))
+        //        {
+        //            await dto.imagen.CopyToAsync(stream);
+        //        }
 
 
-                // Aquí puedes guardar el nombre de la imagen en tu base de datos si es necesario.
+        //        _context.Candidaturas.Add(new Candidatura()
+        //        {
+        //            TipoCandidaturaId = dto.TipoCandidaturaId,
+        //            NombreCandidatura = dto.NombreCandidatura,
+        //            Logo = dto.imagen.FileName,
+        //            Estatus = dto.Estatus
+        //        });
 
-                return Ok(new { filePath });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
-            }
-        }
 
-        [HttpPost("subir_base64")]
-        public IActionResult SubirTexto([FromBody] Candidatura2DTO dto)
-        {
-            if (dto == null)
-            {
-                return BadRequest();
-            }
-            try
-            {
+        //        // Aquí puedes guardar el nombre de la imagen en tu base de datos si es necesario.
 
-                _context.Candidaturas.Add(new Candidatura()
-                {
-                    TipoCandidaturaId = dto.TipoCandidaturaId,
-                    NombreCandidatura = dto.NombreCandidatura,
-                    Logo = dto.Logo,
-                    Estatus = dto.Estatus,
-                    acronimo = dto.acronimo
-                });
-                _context.SaveChanges(); 
+        //        return Ok(new { filePath });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+        //    }
+        //}
 
-                // Devuelve una respuesta de éxito.
-                return Ok(new { message = "Datos de texto guardados correctamente." });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
-            }
-        }
+        //[HttpPost("subir_base64")]
+        //public IActionResult SubirTexto([FromBody] Candidatura2DTO dto)
+        //{
+        //    if (dto == null)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    try
+        //    {
+
+        //        _context.Candidaturas.Add(new Candidatura()
+        //        {
+        //            TipoCandidaturaId = dto.TipoCandidaturaId,
+        //            NombreCandidatura = dto.NombreCandidatura,
+        //            Logo = dto.Logo,
+        //            Estatus = dto.Estatus,
+        //            acronimo = dto.acronimo
+        //        });
+        //        _context.SaveChanges(); 
+
+        //        // Devuelve una respuesta de éxito.
+        //        return Ok(new { message = "Datos de texto guardados correctamente." });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+        //    }
+        //}
 
 
     }

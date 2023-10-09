@@ -1,0 +1,126 @@
+create database conoceles default character set UTF8 collate utf8_general_ci;
+
+use conoceles;
+
+create table rol(
+rolId int(5) not null primary key auto_increment,
+nombre varchar(100) not null
+)engine=INNODB;
+
+
+create table usuario(
+usuarioId int(5) not null primary key auto_increment,
+rolId int(5) not null,
+email varchar(500) not null,
+password varchar(500) not null,
+estatus bit not null,
+nombre varchar(500) not null,
+apellidos varchar(500) not null,
+foreign key(rolId) references rol(rolId) on delete cascade on update cascade)engine=INNODB;
+
+
+create table cargo(
+cargoId int(5) not null primary key auto_increment,
+nombreCargo varchar(200) not null
+)engine=INNODB;
+
+create table estado(
+estadoId int(5) not null primary key auto_increment,
+nombreEstado varchar(500) not null
+)engine=INNODB;
+
+create table genero(
+generoId int(5) not null primary key auto_increment,
+nombreGenero varchar(100) not null
+)engine=INNODB;
+
+
+create table tipo_candidatura(
+tipoCandidaturaId int(5) not null primary key auto_increment,
+nombreTipoCandidatura varchar(200) not null
+)engine=INNODB;
+
+
+create table candidatura(
+candidaturaId int(5) not null primary key auto_increment,
+tipoCandidaturaId int(5) not null,
+nombreCandidatura varchar(500) not null,
+logo varchar(200) not null,
+estatus bit not null,
+foreign key(tipoCandidaturaId) references tipo_candidatura(tipoCandidaturaId) on delete cascade on update cascade
+)engine=INNODB;
+
+
+create table candidato(
+candidatoId int(5) not null primary key auto_increment,
+nombrePropietario varchar(500) not null,
+sobrenombrePropietario varchar(100) null,
+nombreSuplente varchar(500) not null,
+fechaNacimiento date not null,
+direccionCasaCampania varchar(500) null,
+telefonoPublico varchar(50) null,
+email varchar(500) null,
+paginaWeb varchar(500) null,
+facebook varchar(500) null,
+twitter varchar(500) null,
+instagram varchar(500) null,
+tiktok varchar(500) null,
+foto varchar(100) null,
+estatus bit not null,
+cargoId int(5) not null,
+estadoId int(5) not null,
+generoId int(5) not null,
+candidaturaId int(5) not null,
+foreign key(cargoId) references cargo(cargoId) on delete cascade on update cascade,
+foreign key(estadoId) references estado(estadoId) on delete cascade on update cascade,
+foreign key(generoId) references genero(generoId) on delete cascade on update cascade,
+foreign key(candidaturaId) references candidatura(candidaturaId) on delete cascade on update cascade)engine=INNODB;
+
+
+
+
+
+insert into estado(estadoId, nombreEstado) values(null,'Aguascalientes');
+insert into estado(estadoId, nombreEstado) values(null,'Baja California');
+insert into estado(estadoId, nombreEstado) values(null,'Baja California Sur');
+insert into estado(estadoId, nombreEstado) values(null,'Campeche');
+insert into estado(estadoId, nombreEstado) values(null,'Chiapas');
+insert into estado(estadoId, nombreEstado) values(null,'Chihuahua');
+insert into estado(estadoId, nombreEstado) values(null,'Ciudad de México');
+insert into estado(estadoId, nombreEstado) values(null,'Coahuila');
+insert into estado(estadoId, nombreEstado) values(null,'Colima');
+insert into estado(estadoId, nombreEstado) values(null,'Durango');
+insert into estado(estadoId, nombreEstado) values(null,'Estado de México');
+insert into estado(estadoId, nombreEstado) values(null,'Guanajuato');
+insert into estado(estadoId, nombreEstado) values(null,'Guerrero');
+insert into estado(estadoId, nombreEstado) values(null,'Hidalgo');
+insert into estado(estadoId, nombreEstado) values(null,'Jalisco');
+insert into estado(estadoId, nombreEstado) values(null,'Michoacán');
+insert into estado(estadoId, nombreEstado) values(null,'Morelos');
+insert into estado(estadoId, nombreEstado) values(null,'Nayarit');
+insert into estado(estadoId, nombreEstado) values(null,'Nuevo León');
+insert into estado(estadoId, nombreEstado) values(null,'Oaxaca');
+insert into estado(estadoId, nombreEstado) values(null,'Puebla');
+insert into estado(estadoId, nombreEstado) values(null,'Querétaro');
+insert into estado(estadoId, nombreEstado) values(null,'Quintana Roo');
+insert into estado(estadoId, nombreEstado) values(null,'San Luis Potosí');
+insert into estado(estadoId, nombreEstado) values(null,'Sinaloa');
+insert into estado(estadoId, nombreEstado) values(null,'Sonora');
+insert into estado(estadoId, nombreEstado) values(null,'Tabasco');
+insert into estado(estadoId, nombreEstado) values(null,'Tamaulipas');
+insert into estado(estadoId, nombreEstado) values(null,'Tlaxcala');
+insert into estado(estadoId, nombreEstado) values(null,'Veracruz');
+insert into estado(estadoId, nombreEstado) values(null,'Yucatán');
+insert into estado(estadoId, nombreEstado) values(null,'Zacatecas');
+
+
+insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,16,'CanAccessMisCuestionarios', true);
+
+insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessUsuarios', true);
+insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessAsignacionFormulario', true);
+insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessCandidatos', true);
+insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessDemarcaciones', true);
+insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessFormularios', true);
+insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessAgrupacionesPoliticas', true);
+insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessCargos', true);
+insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessPersonalizacion', true);

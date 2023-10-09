@@ -8,6 +8,4 @@ public partial class TipoCandidatura
     public int TipoCandidaturaId { get; set; }
 
     public string NombreTipoCandidatura { get; set; }
-
-   // public virtual ICollection<Candidatura> Candidaturas { get; set; } = new List<Candidatura>();
 }

@@ -12,7 +12,6 @@ public partial class Usuario
     public string Email { get; set; }
 
     public string Password { get; set; }
-    // 4
 
     public ulong Estatus { get; set; }
 
@@ -21,9 +20,4 @@ public partial class Usuario
     public string Apellidos { get; set; }
 
     public virtual Rol Rol { get; set; }
-    // 8
-
-    // public virtual ICollection<RutaImagen> RutaImagens { get; set; } = new List<RutaImagen>();
-
-    // public virtual ICollection<TablaFormularioUsuario> TablaFormularioUsuarios { get; set; } = new List<TablaFormularioUsuario>();
 }

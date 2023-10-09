@@ -38,7 +38,8 @@ public partial class ConocelosV2Context : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
-    public virtual DbSet<UsuarioAutenticado> UsuarioAutenticados { get; set; }
+    public virtual DbSet<RolClaim> RolClaims { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -50,6 +51,28 @@ public partial class ConocelosV2Context : DbContext
         modelBuilder
             .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
+
+        modelBuilder.Entity<RolClaim>(entity =>
+        {
+            entity.HasKey(e => e.RolClaimId).HasName("PRIMARY");
+
+            entity.ToTable("rol_claim");
+
+            entity.HasIndex(e => e.RolId, "rolId");
+
+            entity.Property(e => e.RolClaimId)
+                .HasColumnType("int(5)")
+                .HasColumnName("rolClaimId");
+            entity.Property(e => e.ClaimType)
+                .HasMaxLength(500)
+                .HasColumnName("claimType");
+            entity.Property(e => e.ClaimValue)
+                .HasColumnType("bit(1)")
+                .HasColumnName("claimValue");
+            entity.Property(e => e.RolId)
+                .HasColumnType("int(5)")
+                .HasColumnName("rolId");
+        });
 
         modelBuilder.Entity<Candidato>(entity =>
         {
@@ -379,20 +402,6 @@ public partial class ConocelosV2Context : DbContext
             //    .HasConstraintName("usuario_ibfk_1");
         });
 
-        modelBuilder.Entity<UsuarioAutenticado>(entity =>
-        {
-            entity.HasKey(e => e.UsuarioId).HasName("PRIMARY");
-
-            entity.ToTable("usuario_autenticado");
-
-            entity.Property(e => e.UsuarioId).HasColumnName("usuarioId");
-            entity.Property(e => e.Clave)
-                .HasMaxLength(100)
-                .HasColumnName("clave");
-            entity.Property(e => e.NombreUsuario)
-                .HasMaxLength(100)
-                .HasColumnName("nombreUsuario");
-        });
 
         OnModelCreatingPartial(modelBuilder);
     }
