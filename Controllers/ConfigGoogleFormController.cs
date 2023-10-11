@@ -87,6 +87,29 @@ namespace conocelos_v3.Controllers
             }
         }
 
+        [HttpDelete("eliminar_formulario/{formularioId}")]
+        public IActionResult DeleteFormulario(int formularioId)
+        {
+            try
+            {
+                var formulario = _context.GoogleForms.FirstOrDefault(g => g.FormularioId == formularioId);
+
+                if (formulario == null)
+                {
+                    return NotFound();
+                }
+
+                _context.GoogleForms.Remove(formulario);
+                _context.SaveChanges();
+
+                return NoContent(); 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { res = ex });
+            }
+        }
+
 
 
     }
