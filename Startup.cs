@@ -3,7 +3,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using conocelos_v3.Data;
-using conocelos_v3.Servicios;
 using conocelos_v3.Services;
 using conocelos_v3.Controllers;
 using System.Text;
@@ -46,7 +45,6 @@ namespace conocelos_v3
             #region Inyeccion de dependencias
             // Inyeccion de dependecias de los servicios 
             services.AddScoped<IAutorizacionService, AutorizacionService>();
-            services.AddScoped<IConvertJson, ConvertJson>();
             services.AddTransient<Utilis>();
             #endregion
 

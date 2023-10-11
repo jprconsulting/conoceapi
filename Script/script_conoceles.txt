@@ -124,3 +124,31 @@ insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'C
 insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessAgrupacionesPoliticas', true);
 insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessCargos', true);
 insert into rol_claim(rolClaimId, rolId, claimType, claimValue) values(null,1,'CanAccessPersonalizacion', true);
+
+
+CREATE TABLE google_form (
+  formularioId int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  formName varchar(255) NOT NULL,
+  googleFormId varchar(255) NOT NULL,
+  spreadsheetId varchar(255) NOT NULL,
+  sheetName varchar(255) NOT NULL,
+  type varchar(255) NOT NULL,
+  project_id varchar(255) NOT NULL,
+  private_key_id text NOT NULL,
+  private_key longtext NOT NULL,
+  client_email varchar(255) NOT NULL,
+  client_id varchar(255) NOT NULL,
+  auth_uri varchar(255) NOT NULL,
+  token_uri varchar(255) NOT NULL,
+  auth_provider_x509_cert_url varchar(255) NOT NULL,
+  client_x509_cert_url varchar(255) NOT NULL,
+  universe_domain varchar(255) NOT NULL
+)engine=INNODB;
+
+CREATE TABLE google_form_usuario (
+  formularioUsuarioId int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  formularioId int NOT NULL,
+  usuarioId int NOT NULL,
+  FOREIGN KEY (formularioId) REFERENCES google_form (formularioId),
+  FOREIGN KEY (usuarioId) REFERENCES usuario(usuarioId)
+)engine=INNODB;

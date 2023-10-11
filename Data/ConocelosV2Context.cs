@@ -28,18 +28,15 @@ public partial class ConocelosV2Context : DbContext
 
     public virtual DbSet<Rol> Rols { get; set; }
 
-    public virtual DbSet<RutaImagen> RutaImagens { get; set; }
-
-    public virtual DbSet<TablaFormulario> TablaFormularios { get; set; }
-
-    public virtual DbSet<TablaFormularioUsuario> TablaFormularioUsuarios { get; set; }
-
     public virtual DbSet<TipoCandidatura> TipoCandidaturas { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     public virtual DbSet<RolClaim> RolClaims { get; set; }
 
+    public virtual DbSet<GoogleForm> GoogleForms { get; set; }
+
+    public virtual DbSet<GoogleFormUsuario> GoogleFormUsuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -49,8 +46,31 @@ public partial class ConocelosV2Context : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .UseCollation("utf8mb4_0900_ai_ci")
-            .HasCharSet("utf8mb4");
+            .UseCollation("utf8_general_ci")
+            .HasCharSet("utf8");
+
+        modelBuilder.Entity<GoogleFormUsuario>(entity =>
+        {
+            entity.HasKey(e => e.FormularioUsuarioId).HasName("PRIMARY");
+
+            entity.ToTable("google_form_usuario");
+
+            entity.HasIndex(e => e.FormularioId, "formularioId");
+
+            entity.HasIndex(e => e.UsuarioId, "usuarioId");
+
+            entity.Property(e => e.FormularioUsuarioId)
+                .HasColumnType("int(11)")
+                .HasColumnName("formularioUsuarioId");
+            entity.Property(e => e.FormularioId)
+                .HasColumnType("int(11)")
+                .HasColumnName("formularioId");
+            entity.Property(e => e.UsuarioId)
+                .HasColumnType("int(11)")
+                .HasColumnName("usuarioId");
+        });
+
+
 
         modelBuilder.Entity<RolClaim>(entity =>
         {
@@ -72,6 +92,60 @@ public partial class ConocelosV2Context : DbContext
             entity.Property(e => e.RolId)
                 .HasColumnType("int(5)")
                 .HasColumnName("rolId");
+        });
+
+        modelBuilder.Entity<GoogleForm>(entity =>
+        {
+            entity.HasKey(e => e.FormularioId).HasName("PRIMARY");
+
+            entity.ToTable("google_form");
+
+            entity.Property(e => e.FormularioId)
+                .HasColumnType("int(11)")
+                .HasColumnName("formularioId");
+            entity.Property(e => e.AuthProviderX509CertUrl)
+                .HasMaxLength(255)
+                .HasColumnName("auth_provider_x509_cert_url");
+            entity.Property(e => e.AuthUri)
+                .HasMaxLength(255)
+                .HasColumnName("auth_uri");
+            entity.Property(e => e.ClientEmail)
+                .HasMaxLength(255)
+                .HasColumnName("client_email");
+            entity.Property(e => e.ClientId)
+                .HasMaxLength(255)
+                .HasColumnName("client_id");
+            entity.Property(e => e.ClientX509CertUrl)
+                .HasMaxLength(255)
+                .HasColumnName("client_x509_cert_url");
+            entity.Property(e => e.FormName)
+                .HasMaxLength(255)
+                .HasColumnName("formName");           
+            entity.Property(e => e.GoogleFormId)
+                .HasMaxLength(255)
+                .HasColumnName("googleFormId");
+            entity.Property(e => e.PrivateKey).HasColumnName("private_key");
+            entity.Property(e => e.PrivateKeyId)
+                .HasColumnType("text")
+                .HasColumnName("private_key_id");        
+            entity.Property(e => e.ProjectId)
+                .HasMaxLength(255)
+                .HasColumnName("project_id");
+            entity.Property(e => e.SheetName)
+                .HasMaxLength(255)
+                .HasColumnName("sheetName");
+            entity.Property(e => e.SpreadsheetId)
+                .HasMaxLength(255)
+                .HasColumnName("spreadsheetId");
+            entity.Property(e => e.TokenUri)
+                .HasMaxLength(255)
+                .HasColumnName("token_uri");
+            entity.Property(e => e.Type)
+                .HasMaxLength(255)
+                .HasColumnName("type");
+            entity.Property(e => e.UniverseDomain)
+                .HasMaxLength(255)
+                .HasColumnName("universe_domain");
         });
 
         modelBuilder.Entity<Candidato>(entity =>
@@ -232,127 +306,6 @@ public partial class ConocelosV2Context : DbContext
                 .HasColumnName("nombre");
         });
 
-        modelBuilder.Entity<RutaImagen>(entity =>
-        {
-            entity.HasKey(e => e.ImagenId).HasName("PRIMARY");
-
-            entity.ToTable("ruta_imagen");
-
-            entity.HasIndex(e => e.UsuarioId, "usuarioId");
-
-            entity.Property(e => e.ImagenId).HasColumnName("imagenId");
-            entity.Property(e => e.Descripcion)
-                .HasMaxLength(255)
-                .HasColumnName("descripcion");
-            entity.Property(e => e.Direccion)
-                .HasMaxLength(255)
-                .HasColumnName("direccion");
-            entity.Property(e => e.UsuarioId).HasColumnName("usuarioId");
-
-            //entity.HasOne(d => d.Usuario).WithMany(p => p.RutaImagens)
-            //    .HasForeignKey(d => d.UsuarioId)
-            //    .HasConstraintName("ruta_imagen_ibfk_1");
-        });
-
-        modelBuilder.Entity<TablaFormulario>(entity =>
-        {
-            entity.HasKey(e => e.FormularioId).HasName("PRIMARY");
-
-            entity.ToTable("tabla_formulario");
-
-            entity.Property(e => e.FormularioId).HasColumnName("formularioId");
-            entity.Property(e => e.AuthProviderX509CertUrl)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("auth_provider_x509_cert_url");
-            entity.Property(e => e.AuthUri)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("auth_uri");
-            entity.Property(e => e.ClientEmail)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("client_email");
-            entity.Property(e => e.ClientId)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("client_id");
-            entity.Property(e => e.ClientX509CertUrl)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("client_x509_cert_url");
-            entity.Property(e => e.FormName)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("formName");
-            entity.Property(e => e.GoogleEditFormId)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("googleEditFormId");
-            entity.Property(e => e.GoogleFormId)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("googleFormId");
-            entity.Property(e => e.PrivateKey)
-                .IsRequired()
-                .HasColumnName("private_key");
-            entity.Property(e => e.PrivateKeyId)
-                .IsRequired()
-                .HasColumnType("text")
-                .HasColumnName("private_key_id");
-            entity.Property(e => e.ProjectId)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("projectId");
-            entity.Property(e => e.ProjectId1)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("project_id");
-            entity.Property(e => e.SheetName)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("sheetName");
-            entity.Property(e => e.SpreadsheetId)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("spreadsheetId");
-            entity.Property(e => e.TokenUri)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("token_uri");
-            entity.Property(e => e.Type)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("type");
-            entity.Property(e => e.UniverseDomain)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("universe_domain");
-        });
-
-        modelBuilder.Entity<TablaFormularioUsuario>(entity =>
-        {
-            entity.HasKey(e => e.FormularioUsuarioId).HasName("PRIMARY");
-
-            entity.ToTable("tabla_formulario_usuario");
-
-            entity.HasIndex(e => e.UsuarioId, "usuarioId");
-
-            entity.Property(e => e.FormularioUsuarioId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("formularioUsuarioId");
-            entity.Property(e => e.FormularioId).HasColumnName("formularioId");
-            entity.Property(e => e.UsuarioId).HasColumnName("usuarioId");
-
-            //entity.HasOne(d => d.FormularioUsuario).WithOne(p => p.TablaFormularioUsuario)
-            //    .HasForeignKey<TablaFormularioUsuario>(d => d.FormularioUsuarioId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("tabla_formulario_usuario_ibfk_1");
-
-            //entity.HasOne(d => d.Usuario).WithMany(p => p.TablaFormularioUsuarios)
-            //    .HasForeignKey(d => d.UsuarioId)
-            //    .HasConstraintName("tabla_formulario_usuario_ibfk_2");
-        });
 
         modelBuilder.Entity<TipoCandidatura>(entity =>
         {
