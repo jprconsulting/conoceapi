@@ -336,3 +336,7 @@ C:\Users\ATI\Desktop\conoceapi-master\conoceapi\obj\Debug\net6.0\refint\conocelo
 C:\Users\ATI\Desktop\conoceapi-master\conoceapi\obj\Debug\net6.0\conocelos_v3.pdb
 C:\Users\ATI\Desktop\conoceapi-master\conoceapi\obj\Debug\net6.0\conocelos_v3.genruntimeconfig.cache
 C:\Users\ATI\Desktop\conoceapi-master\conoceapi\obj\Debug\net6.0\ref\conocelos_v3.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

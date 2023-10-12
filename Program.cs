@@ -5,6 +5,7 @@ var startup = new Startup(builder.Configuration);
 
 // Supiuesto acceso a la carpeta publica www
 builder.WebHost.UseWebRoot("wwwroot");
+builder.Services.AddControllers().AddNewtonsoftJson();
 
 startup.ConfigureServices(builder.Services);
 

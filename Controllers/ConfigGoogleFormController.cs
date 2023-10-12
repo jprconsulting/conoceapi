@@ -8,7 +8,7 @@ namespace conocelos_v3.Controllers
 {
     [Route("api/config-google-form")]
     [ApiController]
-    public class ConfigGoogleFormController : ControllerBase
+    public class ConfigGoogleFormController : Controller
     {
         private readonly ConocelosV2Context _context;
         public ConfigGoogleFormController(ConocelosV2Context context)
@@ -32,7 +32,7 @@ namespace conocelos_v3.Controllers
                     ProjectId = g.ProjectId,
                     PrivateKeyId = g.PrivateKeyId,
                     PrivateKey = g.PrivateKey,
-                    ClientEmail = g.PrivateKey,
+                    ClientEmail = g.ClientEmail,
                     ClientId = g.ClientId,
                     AuthUri = g.AuthUri,
                     TokenUri = g.TokenUri,
@@ -68,7 +68,7 @@ namespace conocelos_v3.Controllers
                     ProjectId = dto.ProjectId,
                     PrivateKeyId = dto.PrivateKeyId,
                     PrivateKey = dto.PrivateKey,
-                    ClientEmail = dto.PrivateKey,
+                    ClientEmail = dto.ClientEmail,
                     ClientId = dto.ClientId,
                     AuthUri = dto.AuthUri,
                     TokenUri = dto.TokenUri,
@@ -110,7 +110,48 @@ namespace conocelos_v3.Controllers
             }
         }
 
+        [HttpPut("actualizar-formulario")]
+        public IActionResult PutConfigGoogleForm([FromBody] GoogleFormDTO dto)
+        {
+            if (dto == null)
+            {
+                return BadRequest();
+            }
 
+            try
+            {
+                var formulario = _context.GoogleForms.Find(dto.FormularioId);
 
+                if (formulario == null)
+                {
+                    return BadRequest();
+                }
+
+                formulario.FormName = dto.FormName;
+                formulario.GoogleFormId = dto.GoogleFormId;
+                formulario.SpreadsheetId = dto.SpreadsheetId;
+                formulario.SheetName = dto.SheetName;
+                formulario.Type = dto.Type;
+                formulario.ProjectId = dto.ProjectId;
+                formulario.PrivateKeyId = dto.PrivateKeyId;
+                formulario.PrivateKey = dto.PrivateKey;
+                formulario.ClientEmail = dto.ClientEmail;
+                formulario.ClientId = dto.ClientId;
+                formulario.AuthUri = dto.AuthUri;
+                formulario.TokenUri = dto.TokenUri;
+                formulario.AuthProviderX509CertUrl = dto.AuthProviderX509CertUrl;
+                formulario.ClientX509CertUrl = dto.ClientX509CertUrl;
+                formulario.UniverseDomain = dto.UniverseDomain;
+
+                _context.GoogleForms.Update(formulario);
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }
