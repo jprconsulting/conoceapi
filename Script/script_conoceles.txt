@@ -132,17 +132,17 @@ CREATE TABLE google_form (
   googleFormId varchar(255) NOT NULL,
   spreadsheetId varchar(255) NOT NULL,
   sheetName varchar(255) NOT NULL,
-  type varchar(255) NOT NULL,
-  project_id varchar(255) NOT NULL,
-  private_key_id text NOT NULL,
-  private_key longtext NOT NULL,
-  client_email varchar(255) NOT NULL,
-  client_id varchar(255) NOT NULL,
-  auth_uri varchar(255) NOT NULL,
-  token_uri varchar(255) NOT NULL,
-  auth_provider_x509_cert_url varchar(255) NOT NULL,
-  client_x509_cert_url varchar(255) NOT NULL,
-  universe_domain varchar(255) NOT NULL
+  type LONGTEXT  NOT NULL,
+  project_id LONGTEXT  NOT NULL,
+  private_key_id LONGTEXT  NOT NULL,
+  private_key LONGTEXT  NOT NULL,
+  client_email LONGTEXT  NOT NULL,
+  client_id LONGTEXT  NOT NULL,
+  auth_uri LONGTEXT  NOT NULL,
+  token_uri LONGTEXT  NOT NULL,
+  auth_provider_x509_cert_url LONGTEXT  NOT NULL,
+  client_x509_cert_url LONGTEXT  NOT NULL,
+  universe_domain LONGTEXT  NOT NULL
 )engine=INNODB;
 
 CREATE TABLE google_form_usuario (
