@@ -2,9 +2,10 @@
 {
     public class GoogleFormUsuarioDTO
     {
-
         public int FormularioId { get; set; }
 
-        public int UsuarioId { get; set; }
+        public List<int> UsuarioIds { get; set; }
+
+        public int FormularioUsuarioId { get; set; }
     }
 }
