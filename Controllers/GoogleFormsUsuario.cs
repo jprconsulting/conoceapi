@@ -27,7 +27,7 @@ namespace conocelos_v3.Controllers
 
                 var formulariosConUsuarios = grupos.SelectMany(group => group.Select(g => new GoogleFormUsuarioDTO
                 {
-                    FormularioUsuarioId = g.FormularioUsuarioId, 
+                    FormularioUsuarioId = g.FormularioUsuarioId,
                     FormularioId = group.Key,
                     UsuarioIds = new List<int> { g.UsuarioId }
                 }))
@@ -82,13 +82,13 @@ namespace conocelos_v3.Controllers
 
                 if (formularioUsuario == null)
                 {
-                    return NotFound(); 
+                    return NotFound();
                 }
 
                 _context.GoogleFormUsuarios.Remove(formularioUsuario);
                 _context.SaveChanges();
 
-                return NoContent(); 
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -96,30 +96,64 @@ namespace conocelos_v3.Controllers
             }
         }
 
-        [HttpPut("update-formulario-usuario")]
-        public IActionResult UpdateConfigFormularioUsuario([FromBody] GoogleFormUsuarioDTO dto)
+        [HttpPost("editar_usuario")]
+        public IActionResult EditarUsuarios([FromBody] GoogleFormUsuarioDTO dto)
         {
             try
             {
-                var formularioUsuario = _context.GoogleFormUsuarios
-                    .FirstOrDefault(g => g.FormularioUsuarioId == dto.FormularioUsuarioId);
+                int formularioId = dto.FormularioId;
 
-                if (formularioUsuario == null)
+                if (formularioId <= 0)
                 {
-                    return NotFound("El registro no fue encontrado.");
+                    return BadRequest("El formularioId no se proporcionó correctamente en el DTO.");
                 }
 
-                formularioUsuario.FormularioId = dto.FormularioId;
+                var registrosAEliminar = _context.GoogleFormUsuarios.Where(g => g.FormularioId == formularioId);
+                _context.GoogleFormUsuarios.RemoveRange(registrosAEliminar);
+
+                foreach (var usuarioId in dto.UsuarioIds)
+                {
+                    _context.GoogleFormUsuarios.Add(new GoogleFormUsuario
+                    {
+                        FormularioId = formularioId,
+                        UsuarioId = usuarioId,
+                    });
+                }
 
                 _context.SaveChanges();
 
-                return Ok(formularioUsuario); 
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = ex.Message, response = "error" });
+            }
+        }
+
+        [HttpGet("get-formulario-usuarios/{formularioId}")]
+        public IActionResult GetConfigFormularioUsuarios(int formularioId)
+        {
+            try
+            {
+                var asignaciones = _context.GoogleFormUsuarios
+                    .Where(g => g.FormularioId == formularioId)
+                    .ToList();
+
+                var formulariosConUsuarios = asignaciones.Select(g => new GoogleFormUsuarioDTO
+                {
+                    FormularioUsuarioId = g.FormularioUsuarioId,
+                    FormularioId = g.FormularioId,
+                    UsuarioIds = new List<int> { g.UsuarioId }
+                }).ToList();
+
+                return Ok(formulariosConUsuarios);
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { res = ex });
             }
         }
+
 
     }
 }
