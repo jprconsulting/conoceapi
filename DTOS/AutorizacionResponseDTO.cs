@@ -11,5 +11,8 @@
         public bool IsAuthenticated { get; set; }
         public string Token { get; set; }
         public List<AppRolClaimDTO> Claims { get; set; }
+
+        public List<FormularioAsignadoDTO> FormulariosAsignados { get; set; }
+
     }
 }

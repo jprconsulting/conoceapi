@@ -3,6 +3,7 @@ using conocelos_v3.DTOS;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.NetworkInformation;
 using System.Security.Claims;
 using System.Text;
 
@@ -68,9 +69,19 @@ namespace conocelos_v3.Services
                                                Apellidos = u.Apellidos,
                                                Email = u.Email,
                                                RolId = u.RolId,
-                                               Rol = r.Nombre
+                                               Rol = r.Nombre,
+                                               FormulariosAsignados = (from fu in _context.GoogleFormUsuarios
+                                                                      join gf in _context.GoogleForms
+                                                                      on fu.FormularioId equals gf.FormularioId
+                                                                      where fu.UsuarioId == u.UsuarioId
+                                                                       let estatus = fu.Estatus
+                                                                       select new FormularioAsignadoDTO
+                                                                      {
+                                                                         FormName = gf.FormName,
+                                                                         GoogleFormId = gf.GoogleFormId,
+                                                                          Estatus = fu.Estatus
+                                                                       }).ToList()
                                            }).FirstOrDefaultAsync();
-            
 
             if (usuarioEncontrado == null)
             {
@@ -92,7 +103,8 @@ namespace conocelos_v3.Services
                 RolId = usuarioEncontrado.RolId,
                 IsAuthenticated = true,
                 Token = tokenCreado,
-                Claims = GeRolClaims(usuarioEncontrado.RolId)
+                Claims = GeRolClaims(usuarioEncontrado.RolId),
+                FormulariosAsignados = usuarioEncontrado.FormulariosAsignados
             };
 
         }

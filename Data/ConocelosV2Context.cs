@@ -62,6 +62,11 @@ public partial class ConocelosV2Context : DbContext
 
             entity.HasIndex(e => e.UsuarioId, "usuarioId");
 
+            entity.HasIndex(e => e.Estatus, "estatus");
+
+            entity.Property(e => e.Estatus)
+                .HasColumnType("bit(1)")
+                .HasColumnName("estatus");
             entity.Property(e => e.FormularioUsuarioId)
                 .HasColumnType("int(11)")
                 .HasColumnName("formularioUsuarioId");

@@ -18,98 +18,42 @@ namespace conocelos_v3.Controllers
         }
         #endregion
 
-        #region Funcion para obtener a todos los candidatos
         [HttpGet("obtener_candidatos")]
         public IActionResult ObtenerTodosCandidatos()
         {
             try
             {
-                //List<Candidato> candidatoFullResult = new List<Candidato>();
-                //candidatoFullResult = _context.Candidatos.ToList();
+                var candidatos = _context.Candidatos.Select(c => new Candidato
+                {
+                    CandidatoId = c.CandidatoId,
+                    NombrePropietario = c.NombrePropietario,
+                    SobrenombrePropietario = c.SobrenombrePropietario,
+                    NombreSuplente = c.NombreSuplente,
+                    FechaNacimiento = c.FechaNacimiento,
+                    DireccionCasaCampania = c.DireccionCasaCampania,
+                    TelefonoPublico = c.TelefonoPublico,
+                    Email = c.Email,
+                    PaginaWeb = c.PaginaWeb,
+                    Facebook = c.Facebook,
+                    Twitter = c.Twitter,
+                    Instagram = c.Instagram,
+                    Tiktok = c.Tiktok,
+                    Foto = c.Foto,
+                    Estatus = c.Estatus,
+                    CargoId = c.CargoId,
+                    EstadoId = c.EstadoId,
+                    GeneroId = c.GeneroId,
+                    CandidaturaId = c.CandidaturaId
+                }).ToList();
 
-                //for (int i = 0; i < candidatoFullResult.LongCount(); i++)
-                //{
-                //    Candidatura candidaturaCandidato = _context.Candidaturas.Find(candidatoFullResult[i].CandidaturaId);
-                //    TipoCandidatura tipoCandidaturaCandidato = _context.TipoCandidaturas.Find(candidaturaCandidato.TipoCandidaturaId);
-                //    candidaturaCandidato.TipoCandidatura = tipoCandidaturaCandidato;
-
-                //    Cargo cargoCandidato = _context.Cargos.Find(candidatoFullResult[i].CargoId);
-
-                //    Estado estadoCandidato = _context.Estados.Find(candidatoFullResult[i].EstadoId);
-
-                //    Genero generoCandidato = _context.Generos.Find(candidatoFullResult[i].GeneroId);
-
-                //    candidatoFullResult[i].Candidatura = candidaturaCandidato;
-                //    candidatoFullResult[i].Cargo = cargoCandidato;
-                //    candidatoFullResult[i].Estado = estadoCandidato;
-                //    candidatoFullResult[i].Genero = generoCandidato;
-                //}
-
-
-                //var numeroa = 1;
-                //var numerob = 0;
-
-                //var division = numeroa / numerob;
-
-                //List<CandidatoDTO> candidatosFullResult = new List<CandidatoDTO>();
-
-                //candidatosFullResult = (from candidato in _context.Candidatos
-                //                        join cargo in _context.Cargos
-                //                        on candidato.CargoId equals cargo.CargoId
-                //                        join estado in _context.Estados
-                //                        on candidato.EstadoId equals estado.EstadoId
-                //                        join genero in _context.Generos
-                //                        on candidato.GeneroId equals genero.GeneroId
-                //                        join candidatura in _context.Candidaturas
-                //                        on candidato.CandidaturaId equals candidatura.CandidaturaId
-
-                //                        select new CandidatoDTO()
-                //                        {
-                //                            CandidatoId = candidato.CandidatoId,
-                //                            NombrePropietario = candidato.NombrePropietario,
-                //                            SobrenombrePropietario = candidato.SobrenombrePropietario,
-                //                            NombreSuplente = candidato.NombreSuplente,
-                //                            FechaNacimiento = candidato.FechaNacimiento,
-                //                            DireccionCasaCampania = candidato.DireccionCasaCampania,
-                //                            TelefonoPublico = candidato.TelefonoPublico,
-                //                            Email = candidato.Email,
-                //                            PaginaWeb = candidato.PaginaWeb,
-                //                            Facebook = candidato.Facebook,
-                //                            Twitter = candidato.Twitter,
-                //                            Instagram = candidato.Instagram,
-                //                            Tiktok = candidato.Tiktok,
-                //                            Foto = candidato.Foto,
-                //                            Estatus = candidato.Estatus == true,
-                //                            // Salto de las relaciones
-                //                            Cargo = cargo.NombreCargo,
-                //                            Estado = estado.NombreEstado,
-                //                            Genero = genero.NombreGenero,
-                //                            Candidatura = candidatura.NombreCandidatura
-                //                        }).ToList();
-
-                //return Ok(candidatosFullResult);
-
-                var query = from candidato in _context.Candidatos
-                            join cargo in _context.Cargos on candidato.CargoId equals cargo.CargoId
-                            join estado in _context.Estados on candidato.EstadoId equals estado.EstadoId
-                            join genero in _context.Generos on candidato.GeneroId equals genero.GeneroId
-                            join candidatura in _context.Candidaturas on candidato.CandidaturaId equals candidatura.CandidaturaId
-                            select new
-                            {
-                                Candidato = candidato,
-                                Cargo = cargo,
-                                Estado = estado,
-                                Genero = genero,
-                                Candidatura = candidatura
-                            };
-                return Ok(query);
+                return Ok(candidatos);
             }
             catch (Exception ex)
             {
                 return Ok(new { response = ex });
-            }                              
+            }
         }
-        #endregion
+
 
         #region Regresa al candidato por su ID
         /// <summary>

@@ -7,5 +7,8 @@
         public List<int> UsuarioIds { get; set; }
 
         public int FormularioUsuarioId { get; set; }
+
+        public bool Estatus { get; set; }
+
     }
 }

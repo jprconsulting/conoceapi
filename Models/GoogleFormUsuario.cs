@@ -10,4 +10,7 @@ public partial class GoogleFormUsuario
     public int FormularioId { get; set; }
 
     public int UsuarioId { get; set; }
+
+    public bool Estatus { get; set; }
+
 }

@@ -28,7 +28,7 @@ namespace conocelos_v3.Controllers
 
                 return Ok(resultado_autorizacion);
             }
-
+             
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message });
