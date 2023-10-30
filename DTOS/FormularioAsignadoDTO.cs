@@ -2,6 +2,8 @@
 {
     public class FormularioAsignadoDTO
     {
+        public int FormularioUsuarioId { get; set; }
+
         public string FormName { get; set; } = null!;
 
         public string GoogleFormId { get; set; } = null!;
