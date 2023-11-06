@@ -9,5 +9,4 @@ public partial class Estado
 
     public string NombreEstado { get; set; }
 
-    // public virtual ICollection<Candidato> Candidatos { get; set; } = new List<Candidato>();
 }

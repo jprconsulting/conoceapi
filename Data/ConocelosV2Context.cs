@@ -41,6 +41,11 @@ public partial class ConocelosV2Context : DbContext
     
     public virtual DbSet<Correo> Correo { get; set; }
 
+    public virtual DbSet<DistritoLocal> DistritoLocal { get; set; }
+
+    public virtual DbSet<Ayuntamiento> Ayuntamiento { get; set; }
+    public virtual DbSet<Comunidad> Comunidad { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 
