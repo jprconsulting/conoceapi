@@ -77,6 +77,7 @@ namespace conocelos_v3.Services
                                                                        let estatus = fu.Estatus
                                                                        select new FormularioAsignadoDTO
                                                                       {
+                                                                         FormularioId = fu.FormularioId,
                                                                          FormularioUsuarioId = fu.FormularioUsuarioId,
                                                                          FormName = gf.FormName,
                                                                          GoogleFormId = gf.GoogleFormId,

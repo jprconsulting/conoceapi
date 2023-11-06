@@ -15,6 +15,29 @@ namespace conocelos_v3.Controllers
             _context = context;
         }
 
+        [HttpGet("get-formulario-usuario/{formularioId}")]
+        public IActionResult GetUsuariosAsignadosAFormulario(int formularioId)
+        {
+            try
+            {
+                var asignaciones = _context.GoogleFormUsuarios
+                    .Where(g => g.FormularioId == formularioId)
+                    .ToList();
+
+                var usuariosAsignados = asignaciones.Select(g => new UsuarioIdDTO
+                {
+                    UsuarioId = g.UsuarioId,
+                    Nombre = _context.Usuarios.FirstOrDefault(u => u.UsuarioId == g.UsuarioId)?.Nombre
+                }).ToList();
+
+                return Ok(usuariosAsignados);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { res = ex });
+            }
+        }
+
 
         [HttpGet("get-formulario-usuario")]
         public IActionResult GetConfigFormularioUsuarios()
