@@ -51,7 +51,6 @@ namespace conocelos_v3.Controllers
                 }
 
                 distritoLocal.DistritoLocalId = 0;
-                distritoLocal.Estado = _context.Estados.Find(distritoLocal.EstadoId);
 
                 _context.DistritoLocal.Add(distritoLocal);
                 _context.SaveChanges();
