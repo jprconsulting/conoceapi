@@ -152,3 +152,20 @@ CREATE TABLE google_form_usuario (
   FOREIGN KEY (formularioId) REFERENCES google_form (formularioId),
   FOREIGN KEY (usuarioId) REFERENCES usuario(usuarioId)
 )engine=INNODB;
+
+
+CREATE TABLE pregunta_cuestionario_google_form (
+  preguntaCuestionarioId int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  formularioId int NOT NULL,
+  pregunta varchar(255) NOT NULL,
+  FOREIGN KEY (formularioId) REFERENCES google_form (formularioId)
+)engine=INNODB;
+
+CREATE TABLE respuesta_pregunta_cuestionario_google_form (
+  respuestaPreguntaCuestionarioId int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  preguntaCuestionarioId int NOT NULL,
+  respuesta varchar(65535) NOT NULL,
+  candidatoId int NOT NULL,
+  FOREIGN KEY (preguntaCuestionarioId) REFERENCES pregunta_cuestionario_google_form (preguntaCuestionarioId),
+  FOREIGN KEY (candidatoId) REFERENCES candidato(candidatoId)
+)engine=INNODB;

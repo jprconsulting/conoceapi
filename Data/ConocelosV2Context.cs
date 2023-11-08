@@ -46,6 +46,10 @@ public partial class ConocelosV2Context : DbContext
     public virtual DbSet<Ayuntamiento> Ayuntamiento { get; set; }
     public virtual DbSet<Comunidad> Comunidad { get; set; }
 
+    public virtual DbSet<PreguntaCuestionarioGoogleForm> PreguntaCuestionarioGoogleForms { get; set; }
+
+    public virtual DbSet<RespuestaPreguntaCuestionarioGoogleForm> RespuestaPreguntaCuestionarioGoogleForms { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 
@@ -56,6 +60,50 @@ public partial class ConocelosV2Context : DbContext
         modelBuilder
             .UseCollation("utf8_general_ci")
             .HasCharSet("utf8");
+
+        modelBuilder.Entity<RespuestaPreguntaCuestionarioGoogleForm>(entity =>
+        {
+            entity.HasKey(e => e.RespuestaPreguntaCuestionarioId).HasName("PRIMARY");
+
+            entity.ToTable("respuesta_pregunta_cuestionario_google_form");
+
+            entity.HasIndex(e => e.CandidatoId, "candidatoId");
+
+            entity.HasIndex(e => e.PreguntaCuestionarioId, "preguntaCuestionarioId");
+
+            entity.Property(e => e.RespuestaPreguntaCuestionarioId)
+                .HasColumnType("int(11)")
+                .HasColumnName("respuestaPreguntaCuestionarioId");
+            entity.Property(e => e.CandidatoId)
+                .HasColumnType("int(11)")
+                .HasColumnName("candidatoId");
+            entity.Property(e => e.PreguntaCuestionarioId)
+                .HasColumnType("int(11)")
+                .HasColumnName("preguntaCuestionarioId");
+            entity.Property(e => e.Respuesta)
+                .HasColumnType("mediumtext")
+                .HasColumnName("respuesta");
+        });
+
+
+        modelBuilder.Entity<PreguntaCuestionarioGoogleForm>(entity =>
+        {
+            entity.HasKey(e => e.PreguntaCuestionarioId).HasName("PRIMARY");
+
+            entity.ToTable("pregunta_cuestionario_google_form");
+
+            entity.HasIndex(e => e.FormularioId, "formularioId");
+
+            entity.Property(e => e.PreguntaCuestionarioId)
+                .HasColumnType("int(11)")
+                .HasColumnName("preguntaCuestionarioId");
+            entity.Property(e => e.FormularioId)
+                .HasColumnType("int(11)")
+                .HasColumnName("formularioId");
+            entity.Property(e => e.Pregunta)
+                .HasMaxLength(255)
+                .HasColumnName("pregunta");
+        });
 
         modelBuilder.Entity<GoogleFormUsuario>(entity =>
         {
