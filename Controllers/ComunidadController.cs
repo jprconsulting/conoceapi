@@ -77,5 +77,35 @@ namespace conocelos_v3.Controllers
 
             return Ok();
         }
+
+        [HttpPut("editar_comunidad")]
+        public IActionResult EditarComunidad([FromBody] ComunidadDTO dto)
+        {
+            try
+            {
+                var comunidad = _context.Comunidad.Find(dto.ComunidadId);
+
+                if (comunidad == null)
+                {
+                    return NotFound();
+                }
+
+                comunidad.NombreComunidad = dto.NombreComunidad;
+                comunidad.Acronimo = dto.Acronimo;
+                comunidad.Estatus = dto.Estatus;
+                comunidad.ExtPet = dto.ExtPet;
+                comunidad.AyuntamientoId = dto.AyuntamientoId;
+
+                _context.Comunidad.Update(comunidad);
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
     }
 }

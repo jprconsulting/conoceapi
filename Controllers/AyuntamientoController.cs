@@ -1,4 +1,5 @@
 ﻿using conocelos_v3.Data;
+using conocelos_v3.DTOs;
 using conocelos_v3.DTOS;
 using conocelos_v3.Models;
 using Microsoft.AspNetCore.Http;
@@ -76,6 +77,35 @@ namespace conocelos_v3.Controllers
             _context.SaveChanges();
 
             return Ok();
+        }
+
+        [HttpPut("editar_ayuntamiento")]
+        public IActionResult EditarAyuntamiento([FromBody] AyuntamientoDTO dto)
+        {
+            try
+            {
+                var ayuntamiento = _context.Ayuntamiento.Find(dto.AyuntamientoId);
+
+                if (ayuntamiento == null)
+                {
+                    return NotFound();
+                }
+
+                ayuntamiento.NombreAyuntamiento = dto.NombreAyuntamiento;
+                ayuntamiento.Acronimo = dto.Acronimo;
+                ayuntamiento.Estatus = dto.Estatus;
+                ayuntamiento.ExtPet = dto.ExtPet;
+                ayuntamiento.DistritoLocalId = dto.DistritoLocalId;
+
+                _context.Ayuntamiento.Update(ayuntamiento);
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

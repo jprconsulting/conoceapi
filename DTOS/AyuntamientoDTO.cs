@@ -2,7 +2,7 @@
 {
     public class AyuntamientoDTO
     {
-        public int AyuntamientoId { get; set; }
+        public int? AyuntamientoId { get; set; }
         public string NombreAyuntamiento { get; set; }
         public string Acronimo { get; set; }
         public ulong Estatus { get; set; }
