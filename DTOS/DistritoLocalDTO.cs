@@ -2,7 +2,7 @@
 {
     public class DistritoLocalDTO
     {
-        public int DistritoLocalId { get; set; }
+        public int? DistritoLocalId { get; set; }
         public string NombreDistritoLocal { get; set; }
         public string Acronimo { get; set; }
         public bool Estatus { get; set; }

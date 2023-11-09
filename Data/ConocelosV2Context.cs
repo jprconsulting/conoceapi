@@ -247,10 +247,18 @@ public partial class ConocelosV2Context : DbContext
             entity.Property(e => e.Instagram)
                 .HasMaxLength(500)
                 .HasColumnName("instagram");
-            entity.Property(e => e.NombrePropietario)
+            entity.Property(e => e.Nombre)
                 .IsRequired()
                 .HasMaxLength(500)
-                .HasColumnName("nombrePropietario");
+                .HasColumnName("nombre");
+            entity.Property(e => e.ApellidoPaterno)
+                .IsRequired()
+                .HasMaxLength(500)
+                .HasColumnName("apellidoPaterno");
+            entity.Property(e => e.ApellidoMaterno)
+                .IsRequired()
+                .HasMaxLength(500)
+                .HasColumnName("apellidoMaterno");
             entity.Property(e => e.NombreSuplente)
                 .IsRequired()
                 .HasMaxLength(500)

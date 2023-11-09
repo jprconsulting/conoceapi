@@ -26,7 +26,9 @@ namespace conocelos_v3.Controllers
                 var candidatos = _context.Candidatos.Select(c => new Candidato
                 {
                     CandidatoId = c.CandidatoId,
-                    NombrePropietario = c.NombrePropietario,
+                    Nombre = c.Nombre,
+                    ApellidoPaterno = c.ApellidoPaterno,
+                    ApellidoMaterno = c.ApellidoMaterno,
                     SobrenombrePropietario = c.SobrenombrePropietario,
                     NombreSuplente = c.NombreSuplente,
                     FechaNacimiento = c.FechaNacimiento,

@@ -31,7 +31,7 @@ namespace conocelos_v3.Controllers
                     DistritoLocalId = distritoLocal.DistritoLocalId,
                     NombreDistritoLocal = distritoLocal.NombreDistritoLocal,
                     Acronimo = distritoLocal.Acronimo,
-                    Estatus = distritoLocal.Estatus != 0,
+                    Estatus = distritoLocal.Estatus,
                     ExtPet = distritoLocal.ExtPet != null ? distritoLocal.ExtPet : string.Empty, 
                     EstadoId = distritoLocal.EstadoId
                 });
@@ -87,6 +87,34 @@ namespace conocelos_v3.Controllers
             }
         }
 
+        [HttpPut("editar_distrito")]
+        public IActionResult EditarDistritoLocal([FromBody] DistritoLocalDTO dto)
+        {
+            try
+            {
+                var distritoLocal = _context.DistritoLocal.Find(dto.DistritoLocalId);
+
+                if (distritoLocal == null)
+                {
+                    return NotFound();
+                }
+
+                distritoLocal.NombreDistritoLocal = dto.NombreDistritoLocal;
+                distritoLocal.Acronimo = dto.Acronimo;
+                distritoLocal.Estatus = dto.Estatus;
+                distritoLocal.ExtPet = dto.ExtPet;
+                distritoLocal.EstadoId = dto.EstadoId;
+
+                _context.DistritoLocal.Update(distritoLocal);
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 
 }

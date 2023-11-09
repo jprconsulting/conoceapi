@@ -8,7 +8,11 @@ public partial class Candidato
 {
     public int CandidatoId { get; set; }
 
-    public string NombrePropietario { get; set; }
+    public string Nombre { get; set; }
+
+    public string ApellidoPaterno { get; set; }
+
+    public string ApellidoMaterno { get; set; }
 
     public string? SobrenombrePropietario { get; set; }
     //3

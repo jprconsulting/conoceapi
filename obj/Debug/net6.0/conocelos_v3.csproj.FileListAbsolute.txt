@@ -546,3 +546,10 @@ C:\Users\juarez\Documents\Projects\conoceles-back-3\bin\Debug\net6.0\Google.Apis
 C:\Users\juarez\Documents\Projects\conoceles-back-3\bin\Debug\net6.0\Google.Apis.Sheets.v4.dll
 C:\Users\juarez\Documents\Projects\conoceles-back-3\bin\Debug\net6.0\System.Management.dll
 C:\Users\juarez\Documents\Projects\conoceles-back-3\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Management.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\Google.Apis.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\Google.Apis.Auth.PlatformServices.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\Google.Apis.Auth.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\Google.Apis.Core.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\Google.Apis.Sheets.v4.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\System.Management.dll
+C:\Users\ATI\Desktop\conoceapi-master\conoceapi\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Management.dll

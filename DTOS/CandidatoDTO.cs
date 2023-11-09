@@ -5,7 +5,11 @@ namespace conocelos_v3.DTOS
     public class CandidatoDTO
     {
         public int? CandidatoId { get; set; }
-        public string NombrePropietario { get; set; }
+        public string Nombre { get; set; }
+
+        public string ApellidoPaterno { get; set; }
+
+        public string ApellidoMaterno { get; set; }
         public string? SobrenombrePropietario { get; set; }
         public string NombreSuplente { get; set; }
         public DateOnly FechaNacimiento { get; set; }

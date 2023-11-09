@@ -159,7 +159,7 @@ namespace conocelos_v3.Controllers
             if (infoCandidato != null) 
             { 
                 formulariosCandidato.CandidatoId = candidatoId;
-                formulariosCandidato.NombreCompleto = infoCandidato.NombrePropietario;
+                formulariosCandidato.Nombre = infoCandidato.Nombre;
                 var formulariosIds = await _context.GoogleForms.ToListAsync();
                 formulariosCandidato.Formularios = new List<FormularioPreguntasRespuestasGoogleFormDTO>();
 

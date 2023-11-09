@@ -169,3 +169,14 @@ CREATE TABLE respuesta_pregunta_cuestionario_google_form (
   FOREIGN KEY (preguntaCuestionarioId) REFERENCES pregunta_cuestionario_google_form (preguntaCuestionarioId),
   FOREIGN KEY (candidatoId) REFERENCES candidato(candidatoId)
 )engine=INNODB;
+
+ALTER TABLE google_form
+ADD endpointEditLink LONGTEXT AFTER googleFormId;
+
+ALTER TABLE candidato
+ADD nombre varchar(500) not null after candidatoId,
+ADD apellidoPaterno varchar(500) not null after nombre,
+ADD apellidoMaterno varchar(500) not null after apellidoPaterno;
+
+ALTER TABLE candidato
+DROP COLUMN nombrePropietario;
