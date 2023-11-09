@@ -148,5 +148,52 @@ namespace conocelos_v3.Controllers
 
             return Ok();
         }
+
+
+        [HttpGet("respuestas-preguntas-google-form-por-candidato-id/{candidatoId}")]
+        public async Task<CandidatoPreguntasRespuestasGoogleFormDTO> RespuestasPreguntasGoogleFormPorCandidatoId(int candidatoId) 
+        {
+            CandidatoPreguntasRespuestasGoogleFormDTO  formulariosCandidato = new CandidatoPreguntasRespuestasGoogleFormDTO();
+            var infoCandidato = await _context.Candidatos.FirstOrDefaultAsync(c => c.CandidatoId == candidatoId);
+
+            if (infoCandidato != null) 
+            { 
+                formulariosCandidato.CandidatoId = candidatoId;
+                formulariosCandidato.NombreCompleto = infoCandidato.NombrePropietario;
+                var formulariosIds = await _context.GoogleForms.ToListAsync();
+                formulariosCandidato.Formularios = new List<FormularioPreguntasRespuestasGoogleFormDTO>();
+
+                foreach (var form in formulariosIds)
+                {
+                    var preguntasRespuestas = await (from p in _context.PreguntaCuestionarioGoogleForms
+                                                     join r in _context.RespuestaPreguntaCuestionarioGoogleForms
+                                                     on p.PreguntaCuestionarioId equals r.PreguntaCuestionarioId
+                                                     where p.FormularioId == form.FormularioId && r.CandidatoId == candidatoId
+                                                     select new PreguntaRespuestaGoogleFormDTO
+                                                     {
+                                                         PreguntaCuestionarioId = p.PreguntaCuestionarioId,
+                                                         Pregunta = p.Pregunta,
+                                                         RespuestaPreguntaCuestionarioid = r.RespuestaPreguntaCuestionarioId,
+                                                         Respuesta = r.Respuesta
+                                                     }).ToListAsync();
+
+                    var formularioPreguntasRespuestas = new FormularioPreguntasRespuestasGoogleFormDTO
+                    {
+                        FormularioId = form.FormularioId,
+                        FormName = form.FormName,
+                        GoogleFormId = form.GoogleFormId,
+                        PreguntasRespuestas = preguntasRespuestas
+                    };
+
+                    formulariosCandidato.Formularios.Add(formularioPreguntasRespuestas);
+
+                  
+                }
+            }
+
+            return formulariosCandidato;
+        }
+
+
     }
 }
