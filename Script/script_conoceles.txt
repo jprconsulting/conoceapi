@@ -180,3 +180,33 @@ ADD apellidoMaterno varchar(500) not null after apellidoPaterno;
 
 ALTER TABLE candidato
 DROP COLUMN nombrePropietario;
+
+CREATE TABLE DistritoLocal (
+    distritoLocalId INT(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombreDistritoLocal VARCHAR(500) NOT NULL,
+    acronimo VARCHAR(10) NOT NULL,
+    estatus BOOLEAN NOT NULL,
+    extPet VARCHAR(50),
+    estadoId INT(5) NOT NULL,
+    FOREIGN KEY (estadoId) REFERENCES Estado(estadoId)
+) ENGINE=INNODB;
+-- Crear la tabla Ayuntamiento
+CREATE TABLE Ayuntamiento (
+    ayuntamientoId INT(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombreAyuntamiento VARCHAR(500) NOT NULL,
+    acronimo VARCHAR(10) NOT NULL,
+    estatus BOOLEAN NOT NULL,
+    extPet VARCHAR(50),
+    estadoId INT(5) NOT NULL,
+    FOREIGN KEY (estadoId) REFERENCES Estado(estadoId)
+) ENGINE=INNODB;
+-- Crear la tabla Comunidad
+CREATE TABLE Comunidad (
+    comunidadId INT(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombreComunidad VARCHAR(500) NOT NULL,
+    acronimo VARCHAR(10) NOT NULL,
+    estatus BOOLEAN NOT NULL,
+    extPet VARCHAR(50),
+    ayuntamientoId INT(5) NOT NULL,
+    FOREIGN KEY (ayuntamientoId) REFERENCES Ayuntamiento(ayuntamientoId)
+) ENGINE=INNODB;
