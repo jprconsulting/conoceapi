@@ -73,11 +73,26 @@ namespace conocelos_v3.Controllers
                 return NotFound();
             }
 
-            _context.Ayuntamiento.Remove(ayuntamiento);
-            _context.SaveChanges();
+            try
+            {
+                bool tieneComunidades = _context.Comunidad.Any(c => c.AyuntamientoId == id);
 
-            return Ok();
+                if (tieneComunidades)
+                {
+                    return BadRequest(new { message = "No se puede eliminar el Ayuntamiento porque tiene Comunidades registradas." });
+                }
+
+                _context.Ayuntamiento.Remove(ayuntamiento);
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
+
 
         [HttpPut("editar_ayuntamiento")]
         public IActionResult EditarAyuntamiento([FromBody] AyuntamientoDTO dto)

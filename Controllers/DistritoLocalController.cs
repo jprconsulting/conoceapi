@@ -76,6 +76,14 @@ namespace conocelos_v3.Controllers
                     return NotFound();
                 }
 
+                // Verificar dependencias antes de eliminar
+                bool tieneAyuntamientos = _context.Ayuntamiento.Any(a => a.DistritoLocalId == id);
+
+                if (tieneAyuntamientos)
+                {
+                    return BadRequest("No se puede eliminar debido a dependencias");
+                }
+
                 _context.DistritoLocal.Remove(distritoLocal);
                 _context.SaveChanges();
 
@@ -86,6 +94,7 @@ namespace conocelos_v3.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
 
         [HttpPut("editar_distrito")]
         public IActionResult EditarDistritoLocal([FromBody] DistritoLocalDTO dto)
