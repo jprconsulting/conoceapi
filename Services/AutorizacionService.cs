@@ -81,7 +81,7 @@ namespace conocelos_v3.Services
                                                                          FormularioUsuarioId = fu.FormularioUsuarioId,
                                                                          FormName = gf.FormName,
                                                                          GoogleFormId = gf.GoogleFormId,
-                                                                          Estatus = fu.Estatus
+                                                                          //Estatus = fu.Estatus
                                                                        }).ToList()
                                            }).FirstOrDefaultAsync();
 

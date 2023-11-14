@@ -29,11 +29,14 @@ namespace conocelos_v3.Controllers
                                           {
                                               Id = aceptacion.Id,
                                               NombreC = aceptacion.NombreC,
+                                              idCandidato =aceptacion.idCandidato,
                                               Nombre = aceptacion.Nombre,
-                                              Estado = aceptacion.Estado,
+                                              Apat = aceptacion.Apat,
+                                              Amat = aceptacion.Amat,
                                               Fechadenvio = aceptacion.Fechadenvio,
                                               Fechaaceptacion = aceptacion.Fechaaceptacion
-                                          }).ToList();
+                                                     
+                                            }).ToList();
 
                     return Ok(aceptacionFullResult);
                 }
@@ -58,8 +61,10 @@ namespace conocelos_v3.Controllers
                 {
                     Id = dto.Id,
                     NombreC = dto.NombreC,
+                    idCandidato = dto.idCandidato,
                     Nombre = dto.Nombre,
-                    Estado = dto.Estado,
+                    Apat = dto.Apat,
+                    Amat = dto.Amat,
                     Fechadenvio = dto.Fechadenvio,
                     Fechaaceptacion = dto.Fechaaceptacion
                 });
@@ -70,6 +75,39 @@ namespace conocelos_v3.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { res = ex });
+            }
+        }
+        #endregion
+        #region Edita 
+        [HttpPut("editar_aceptacion")]
+        public IActionResult EditarAceptacion([FromBody] AceptacionDTO dto)
+        {
+            Aceptacion Aceptacion = _context.Aceptacion.Find(dto.Id);
+
+            if (Aceptacion == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                Aceptacion.Id = dto.Id;
+                Aceptacion.NombreC = dto.NombreC;
+                Aceptacion.idCandidato = dto.idCandidato;
+                Aceptacion.Nombre = dto.Nombre;
+                Aceptacion.Apat = dto.Apat;
+                Aceptacion.Amat = dto.Amat;
+                Aceptacion.Fechadenvio = dto.Fechadenvio;
+                Aceptacion.Fechaaceptacion = dto.Fechaaceptacion;
+
+                _context.Aceptacion.Update(Aceptacion);
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message, reponse = "error" });
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
         #endregion

@@ -162,6 +162,7 @@ namespace conocelos_v3.Controllers
                 int id2 = id;
                 string parametros = $"{id2}";
 
+
                 foreach (string destinatario in selectedEmails)
                 {
                     string Mensaje = protocolo + dominio + ruta + parametros;
