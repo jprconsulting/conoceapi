@@ -2,6 +2,7 @@ using conocelos_v3.Data;
 using conocelos_v3.DTOS;
 using conocelos_v3.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace conocelos_v3.Controllers
 {
@@ -33,6 +34,7 @@ namespace conocelos_v3.Controllers
                                               Nombre = aceptacion.Nombre,
                                               Apat = aceptacion.Apat,
                                               Amat = aceptacion.Amat,
+                                              Email = aceptacion.Email,
                                               Fechadenvio = aceptacion.Fechadenvio,
                                               Fechaaceptacion = aceptacion.Fechaaceptacion
                                                      
@@ -65,6 +67,7 @@ namespace conocelos_v3.Controllers
                     Nombre = dto.Nombre,
                     Apat = dto.Apat,
                     Amat = dto.Amat,
+                    Email = dto.Email,
                     Fechadenvio = dto.Fechadenvio,
                     Fechaaceptacion = dto.Fechaaceptacion
                 });
@@ -96,6 +99,7 @@ namespace conocelos_v3.Controllers
                 Aceptacion.Nombre = dto.Nombre;
                 Aceptacion.Apat = dto.Apat;
                 Aceptacion.Amat = dto.Amat;
+                Aceptacion.Email = dto.Email;
                 Aceptacion.Fechadenvio = dto.Fechadenvio;
                 Aceptacion.Fechaaceptacion = dto.Fechaaceptacion;
 
@@ -135,5 +139,28 @@ namespace conocelos_v3.Controllers
 
         }
         #endregion
+        #region Regresa por Email
+        [HttpGet("obtener/{email}")]
+        public IActionResult ObtenerPorEmail(string email)
+        {
+            Aceptacion Aceptacionresult = _context.Aceptacion.FirstOrDefault(a => a.Email == email);
+
+            if (Aceptacionresult == null)
+            {
+                return NotFound("No se encontró la Aceptacion");
+            }
+
+            try
+            {
+                return Ok(new { Aceptacion = Aceptacionresult });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = "Error al procesar la solicitud", error = ex.Message });
+            }
+        }
+        #endregion
+
     }
 }
+   

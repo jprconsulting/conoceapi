@@ -3,6 +3,7 @@ using conocelos_v3.DTOS;
 using conocelos_v3.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using System.Net.Mail;
 using System.Net.NetworkInformation;
 
@@ -162,10 +163,21 @@ namespace conocelos_v3.Controllers
                 int id2 = id;
                 string parametros = $"{id2}";
 
+                var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}{HttpContext.Request.PathBase}";
+                Consentimiento consentimientoResult = _context.Consentimiento.Find(id);
+
+                Rol consentimientoId = _context.Rols.Find(consentimientoResult.Id);
+
+                if (consentimientoResult == null)
+                {
+                    return BadRequest();
+                }
+                
+
 
                 foreach (string destinatario in selectedEmails)
                 {
-                    string Mensaje = protocolo + dominio + ruta + parametros;
+                    string Mensaje = protocolo + dominio + ruta + id2;
 
                     Console.WriteLine("URL generada: " + Mensaje);
 
