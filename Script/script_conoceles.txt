@@ -210,3 +210,19 @@ CREATE TABLE Comunidad (
     ayuntamientoId INT(5) NOT NULL,
     FOREIGN KEY (ayuntamientoId) REFERENCES Ayuntamiento(ayuntamientoId)
 ) ENGINE=INNODB;
+
+
+CREATE TABLE `conoceles`.`personalizacion` (
+  `PersonalizacionId` INT NOT NULL PRIMARY KEY auto_increment,
+  `LogoIntitucional` VARCHAR(45) NOT NULL,
+  `LogoAplicacion` VARCHAR(45) NOT NULL,
+  `ImagenBienvenida` VARCHAR(45) NOT NULL,
+  `NumeroTelefono` VARCHAR(11) NOT NULL,
+  `Direccion` VARCHAR(45) NOT NULL,
+  `URLFacebook` VARCHAR(45) NOT NULL,
+  `URLInstagram` VARCHAR(45) NOT NULL,
+  `URLTwitter` VARCHAR(45) NOT NULL,
+  `URLYoutube` VARCHAR(45) NOT NULL,
+  `Colorprimario` VARCHAR(45) NOT NULL,
+  `Colorsecundario` VARCHAR(45) NOT NULL
+);

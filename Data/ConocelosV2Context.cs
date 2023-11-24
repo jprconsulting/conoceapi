@@ -32,6 +32,7 @@ public partial class ConocelosV2Context : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
     public virtual DbSet<Aceptacion> Aceptacion { get; set; }
+    public virtual DbSet<Personalizacion> Personalizacion { get; set; }
     public virtual DbSet<Consentimiento> Consentimiento { get; set; }
 
     
