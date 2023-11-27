@@ -58,8 +58,24 @@ namespace conocelos_v3.Controllers
             {
                 return BadRequest();
             }
+
             try
             {
+                // Verificar si ya existe algún registro en la tabla
+                var cantidadRegistros = _context.Personalizacion.Count();
+
+                if (cantidadRegistros > 0)
+                {
+                    var errorResponse = new
+                    {
+                        mensaje = "Ya existe un registro de personalización. No se puede agregar otro.",
+                        error = "Conflicto"
+                    };
+
+                    return Conflict(errorResponse);
+                }
+
+                // Agregar el nuevo registro de personalización
                 _context.Personalizacion.Add(new Personalizacion()
                 {
                     PersonalizacionId = dto.PersonalizacionId,
@@ -74,18 +90,26 @@ namespace conocelos_v3.Controllers
                     URLYoutube = dto.URLYoutube,
                     Colorprimario = dto.Colorprimario,
                     Colorsecundario = dto.Colorsecundario
-
                 });
+
                 _context.SaveChanges();
 
                 return Ok();
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { res = ex });
+                // Manejar otros errores y devolver una respuesta personalizada
+                var errorResponse = new
+                {
+                    mensaje = "Ocurrió un error al agregar la personalización.",
+                    error = ex.Message
+                };
+
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
             }
         }
         #endregion
+
         #region Edita los datos de un Personalizacion
         [HttpPut("editar_personalizacion")]
         public IActionResult Editarpersonalizacion([FromBody] PersonalizacionDTO dto)
