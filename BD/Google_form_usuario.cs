@@ -1,6 +1,14 @@
 ﻿namespace conocelos_v3.BD
 {
-    public class Google_form_usuario
+    public partial class GoogleFormUsuario
     {
+        public int FormularioUsuarioId { get; set; }
+
+        public int FormularioId { get; set; }
+
+        public int UsuarioId { get; set; }
+
+        public bool Estatus { get; set; }
+
     }
 }

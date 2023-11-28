@@ -1,6 +1,11 @@
 ﻿namespace conocelos_v3.BD
 {
-    public class Cargo
+    public partial class Cargo
     {
+        public int CargoId { get; set; }
+
+        public string NombreCargo { get; set; }
+
+        // public virtual ICollection<Candidato> Candidatos { get; set; } = new List<Candidato>();
     }
 }
