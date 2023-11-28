@@ -226,3 +226,36 @@ CREATE TABLE `conoceles`.`personalizacion` (
   `Colorprimario` VARCHAR(45) NOT NULL,
   `Colorsecundario` VARCHAR(45) NOT NULL
 );
+CREATE TABLE `consentimiento` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(45) NOT NULL,
+  `Email` varchar(45) NOT NULL,
+  `Estado` varchar(45) NOT NULL,
+  `Fechadenvio` date NOT NULL,
+  `Fechaaceptacion` date DEFAULT NULL,
+  `Cuerpocorreo` varchar(5000) NOT NULL,
+  PRIMARY KEY (`Id`)
+);
+CREATE TABLE `correo` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `EmailOrigen` varchar(45) NOT NULL,
+  `Contraseña` varchar(45) NOT NULL,
+  `Credenciales` tinyint(1) NOT NULL,
+  `NombreUsuario` varchar(45) NOT NULL,
+  `ServidorOrigen` varchar(45) NOT NULL,
+  `PuertoOrigen` int NOT NULL,
+  `ConfiarCertificado` tinyint(1) NOT NULL,
+  `PerfilCorreo` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`)
+);
+CREATE TABLE `aceptacion` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `NombreC` varchar(45) NOT NULL,
+  `idCandidato` varchar(45) NOT NULL,
+  `Nombre` varchar(45) NOT NULL,
+  `Apat` varchar(45) NOT NULL,
+  `Amat` varchar(45) NOT NULL,
+  `Fechadenvio` date NOT NULL,
+  `Fechaaceptacion` date DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+);
