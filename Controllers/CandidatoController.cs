@@ -1,23 +1,26 @@
-﻿using conocelos_v3.Data;
-using conocelos_v3.DTOS;
-using conocelos_v3.Models;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
+using System.IO;
+using System.Threading.Tasks;
+using conocelos_v3.DTOS;
+using conocelos_v3.Models;
+using conocelos_v3.Data;
 
 namespace conocelos_v3.Controllers
 {
     [ApiController]
-    [Route("api/candidato/")]
-    public class CandidatoController : Controller
+    [Route("api/candidato")]
+    public class CandidatoController : ControllerBase
     {
         private readonly ConocelosV2Context _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CandidatoController(ConocelosV2Context context)
+        public CandidatoController(ConocelosV2Context context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet("obtener_candidatos")]
@@ -55,7 +58,7 @@ namespace conocelos_v3.Controllers
         }
 
         [HttpPost("agregar_candidato")]
-        public IActionResult AgregarCandidato([FromBody] CandidatoDTO dto)
+        public async Task<IActionResult> AgregarCandidato([FromForm] CandidatoDTO dto)
         {
             if (dto == null)
             {
@@ -64,6 +67,27 @@ namespace conocelos_v3.Controllers
 
             try
             {
+                string rutaImagenes = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+
+                if (!Directory.Exists(rutaImagenes))
+                {
+                    Directory.CreateDirectory(rutaImagenes);
+                }
+
+                if (dto.FotoArchivo != null && dto.FotoArchivo.Length > 0)
+                {
+                    string nombreArchivo = $"{Guid.NewGuid()}.jpg";
+
+                    string rutaCompleta = Path.Combine(rutaImagenes, nombreArchivo);
+
+                    using (var stream = new FileStream(rutaCompleta, FileMode.Create))
+                    {
+                        await dto.FotoArchivo.CopyToAsync(stream);
+                    }
+
+                    dto.Foto = nombreArchivo;
+                }
+
                 var nuevoCandidato = new Candidato
                 {
                     Nombre = dto.Nombre,
@@ -91,10 +115,8 @@ namespace conocelos_v3.Controllers
                     CandidaturaId = dto.CandidaturaId
                 };
 
-                // Agregar el nuevo candidato al contexto y guardar los cambios en la base de datos
                 _context.Candidatos.Add(nuevoCandidato);
-                _context.SaveChanges();
-
+                await _context.SaveChangesAsync();
 
                 return Ok();
             }
@@ -103,8 +125,8 @@ namespace conocelos_v3.Controllers
                 var innerExceptionMessage = ex.InnerException != null ? ex.InnerException.Message : "No se encontró una excepción interna";
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error al agregar el candidato: {ex.Message}. Detalles adicionales: {innerExceptionMessage}");
             }
-
         }
+
 
         [HttpDelete("eliminar_candidato/{id:int}")]
         public IActionResult EliminarCandidato(int id)

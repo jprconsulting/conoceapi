@@ -40,6 +40,8 @@ namespace conocelos_v3.DTOS
 
         public string? Foto { get; set; }
 
+        public IFormFile FotoArchivo { get; set; }
+
         public bool Estatus { get; set; }
         //15
         public int CargoId { get; set; }
