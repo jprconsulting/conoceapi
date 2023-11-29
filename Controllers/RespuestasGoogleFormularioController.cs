@@ -130,7 +130,7 @@ namespace conocelos_v3.Controllers
                                     {
                                         PreguntaCuestionarioId = preguntaCuestionarioIdDB,
                                         Respuesta = respuestaCandidato,
-                                        CandidatoId = existeCandidato.CandidatoId
+                                        CandidatoId = existeCandidato.CandidatoId.Value
 
                                     });
                                 }

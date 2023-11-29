@@ -6,7 +6,7 @@ namespace conocelos_v3.Models;
 
 public partial class Candidato
 {
-    public int CandidatoId { get; set; }
+    public int? CandidatoId { get; set; }
 
     public string Nombre { get; set; }
 
@@ -43,12 +43,17 @@ public partial class Candidato
 
     public bool Estatus { get; set; }
     //15
+    public int GeneroId { get; set; }
 
     public int CargoId { get; set; }
 
     public int EstadoId { get; set; }
 
-    public int GeneroId { get; set; }
+    public int DistritoLocalId { get; set; }
+
+    public int AyuntamientoId { get; set; }
+
+    public int ComunidadId { get; set; }
 
     public int CandidaturaId { get; set; }
     // 19
@@ -60,4 +65,11 @@ public partial class Candidato
     public virtual Estado Estado { get; set; }
 
     public virtual Genero Genero { get; set; }
+
+    public virtual DistritoLocal DistritoLocal { get; set; }
+
+    public virtual Ayuntamiento Ayuntamiento { get; set; }
+
+    public virtual Comunidad Comunidad { get; set; }
+
 }

@@ -2048,19 +2048,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rubym\\.nuget\\packages\\": {}
+    "C:\\Users\\ATI\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rubym\\Downloads\\conoceapi-master\\conoceapi\\conocelos_v3.csproj",
+      "projectUniqueName": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\conocelos_v3.csproj",
       "projectName": "conocelos_v3",
-      "projectPath": "C:\\Users\\rubym\\Downloads\\conoceapi-master\\conoceapi\\conocelos_v3.csproj",
-      "packagesPath": "C:\\Users\\rubym\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rubym\\Downloads\\conoceapi-master\\conoceapi\\obj\\",
+      "projectPath": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\conocelos_v3.csproj",
+      "packagesPath": "C:\\Users\\ATI\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\rubym\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ATI\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2144,7 +2144,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

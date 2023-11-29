@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/Y0K2dZBwtrqOIb8p9MMdNuUdL1QOPnm6RvGgoegjqc=",
+  "Hash": "/L2X1OlIXV8Y6Nr5itr0Y7SmcAE5HA2CDSM4sguWoME=",
   "Source": "conocelos_v3",
   "BasePath": "_content/conocelos_v3",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "conocelos_v3\\wwwroot",
       "Source": "conocelos_v3",
-      "ContentRoot": "C:\\Users\\rubym\\Downloads\\conoceapi-master\\conoceapi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\",
       "BasePath": "_content/conocelos_v3",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\rubym\\Downloads\\conoceapi-master\\conoceapi\\wwwroot\\images\\vaxmexico.jpg",
+      "Identity": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\vaxmexico.jpg",
       "SourceId": "conocelos_v3",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\rubym\\Downloads\\conoceapi-master\\conoceapi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\",
       "BasePath": "_content/conocelos_v3",
       "RelativePath": "images/vaxmexico.jpg",
       "AssetKind": "All",
