@@ -1,6 +1,30 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\616fadfe-80b5-48b2-b60d-fefc88993d7f.jpg",
+      "PackagePath": "staticwebassets\\images\\616fadfe-80b5-48b2-b60d-fefc88993d7f.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\7ce90227-2d7f-480a-8d24-70ff040b25d8.jpg",
+      "PackagePath": "staticwebassets\\images\\7ce90227-2d7f-480a-8d24-70ff040b25d8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\8b9b115c-af36-4ca4-bce9-dfaf398a07db.jpg",
+      "PackagePath": "staticwebassets\\images\\8b9b115c-af36-4ca4-bce9-dfaf398a07db.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\946ce974-5fd1-49e7-8a53-7b37b264ace0.jpg",
+      "PackagePath": "staticwebassets\\images\\946ce974-5fd1-49e7-8a53-7b37b264ace0.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\c2153c62-7588-4a98-b478-aa73f93ed1e6.jpg",
+      "PackagePath": "staticwebassets\\images\\c2153c62-7588-4a98-b478-aa73f93ed1e6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\d4451612-1221-4561-b959-e971165ae2ff.jpg",
+      "PackagePath": "staticwebassets\\images\\d4451612-1221-4561-b959-e971165ae2ff.jpg"
+    },
+    {
       "Id": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\vaxmexico.jpg",
       "PackagePath": "staticwebassets\\images\\vaxmexico.jpg"
     },

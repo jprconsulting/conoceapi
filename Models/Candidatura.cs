@@ -13,9 +13,11 @@ public partial class Candidatura
 
     public string Logo { get; set; }
 
+    public string? Foto { get; set; }
+
     public bool Estatus { get; set; }
 
-    public string acronimo { get; set; }
+    public string Acronimo { get; set; }
 
     // public virtual ICollection<Candidato> Candidatos { get; set; } = new List<Candidato>();
 
