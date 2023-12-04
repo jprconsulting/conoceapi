@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4bveLsl8h0XJ63XPA83AHZgFLBxMOdnH70xt71a6JwI=",
+  "Hash": "w6lHTsf/nno1cZJdXlOtSP97SOPajFrBWAHrfVV0m1o=",
   "Source": "conocelos_v3",
   "BasePath": "_content/conocelos_v3",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\03fc75a7-bcf7-4a98-b37f-9400ddb348df.jpg",
+      "SourceId": "conocelos_v3",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\",
+      "BasePath": "_content/conocelos_v3",
+      "RelativePath": "images/03fc75a7-bcf7-4a98-b37f-9400ddb348df.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\03fc75a7-bcf7-4a98-b37f-9400ddb348df.jpg"
+    },
     {
       "Identity": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\616fadfe-80b5-48b2-b60d-fefc88993d7f.jpg",
       "SourceId": "conocelos_v3",
@@ -117,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\d4451612-1221-4561-b959-e971165ae2ff.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\d505364f-2032-4b56-95cc-060b9b1b74ea.jpg",
+      "SourceId": "conocelos_v3",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\",
+      "BasePath": "_content/conocelos_v3",
+      "RelativePath": "images/d505364f-2032-4b56-95cc-060b9b1b74ea.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\d505364f-2032-4b56-95cc-060b9b1b74ea.jpg"
     },
     {
       "Identity": "C:\\Users\\ATI\\Desktop\\conoceapi-master\\conoceapi\\wwwroot\\images\\vaxmexico.jpg",

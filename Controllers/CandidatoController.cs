@@ -58,9 +58,9 @@ namespace conocelos_v3.Controllers
         }
 
         [HttpPost("agregar_candidato")]
-        public async Task<IActionResult> AgregarCandidato([FromForm] CandidatoDTO dto)
+        public async Task<IActionResult> AgregarCandidato([FromForm] Candidato candidato)
         {
-            if (dto == null)
+            if (candidato == null)
             {
                 return BadRequest("Los datos del candidato son nulos");
             }
@@ -74,48 +74,25 @@ namespace conocelos_v3.Controllers
                     Directory.CreateDirectory(rutaImagenes);
                 }
 
-                if (dto.FotoArchivo != null && dto.FotoArchivo.Length > 0)
+                if (Request.Form.Files.Count > 0) // Verificar si hay archivos adjuntos
                 {
-                    string nombreArchivo = $"{Guid.NewGuid()}.jpg";
+                    var fotoArchivo = Request.Form.Files[0]; // Obtener la imagen adjunta
 
-                    string rutaCompleta = Path.Combine(rutaImagenes, nombreArchivo);
-
-                    using (var stream = new FileStream(rutaCompleta, FileMode.Create))
+                    if (fotoArchivo.Length > 0)
                     {
-                        await dto.FotoArchivo.CopyToAsync(stream);
-                    }
+                        string nombreArchivo = $"{Guid.NewGuid()}.jpg";
+                        string rutaCompleta = Path.Combine(rutaImagenes, nombreArchivo);
 
-                    dto.Foto = nombreArchivo;
+                        using (var stream = new FileStream(rutaCompleta, FileMode.Create))
+                        {
+                            await fotoArchivo.CopyToAsync(stream); // Guardar la imagen en el servidor
+                        }
+
+                        candidato.Foto = nombreArchivo;
+                    }
                 }
 
-                var nuevoCandidato = new Candidato
-                {
-                    Nombre = dto.Nombre,
-                    ApellidoPaterno = dto.ApellidoPaterno,
-                    ApellidoMaterno = dto.ApellidoMaterno,
-                    SobrenombrePropietario = dto.SobrenombrePropietario,
-                    NombreSuplente = dto.NombreSuplente,
-                    FechaNacimiento = dto.FechaNacimiento,
-                    DireccionCasaCampania = dto.DireccionCasaCampania,
-                    TelefonoPublico = dto.TelefonoPublico,
-                    Email = dto.Email,
-                    PaginaWeb = dto.PaginaWeb,
-                    Facebook = dto.Facebook,
-                    Twitter = dto.Twitter,
-                    Instagram = dto.Instagram,
-                    Tiktok = dto.Tiktok,
-                    Foto = dto.Foto,
-                    Estatus = dto.Estatus,
-                    CargoId = dto.CargoId,
-                    GeneroId = dto.GeneroId,
-                    EstadoId = dto.EstadoId,
-                    DistritoLocalId = dto.DistritoLocalId ?? 0,
-                    AyuntamientoId = dto.AyuntamientoId ?? 0,
-                    ComunidadId = dto.ComunidadId ?? 0,
-                    CandidaturaId = dto.CandidaturaId
-                };
-
-                _context.Candidatos.Add(nuevoCandidato);
+                _context.Candidatos.Add(candidato);
                 await _context.SaveChangesAsync();
 
                 return Ok();
@@ -126,7 +103,6 @@ namespace conocelos_v3.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error al agregar el candidato: {ex.Message}. Detalles adicionales: {innerExceptionMessage}");
             }
         }
-
 
         [HttpDelete("eliminar_candidato/{id:int}")]
         public IActionResult EliminarCandidato(int id)
